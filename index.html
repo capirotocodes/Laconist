@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ============================================================= -->
+    <!--  EDIT: PAGE TITLE & BAND NAME                                  -->
+    <!--  Change "Laconist" everywhere it appears if your band name is  -->
+    <!--  different. The big logo in the hero is the image logo.png.    -->
+    <!-- ============================================================= -->
+    <title>LACONIST — Death Metal</title>
+    <meta
+      name="description"
+      content="Official site of Laconist — death metal."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=UnifrakturCook:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ===============================================================
+   EDIT: COLOR PALETTE  — change these and the whole site updates
+   =============================================================== */
+      :root {
+        --void: #0a0908; /* page background, near-black            */
+        --void-2: #110f0d; /* slightly lifted panels                 */
+        --bone: #e6ded0; /* primary text / headings (bone white)   */
+        --ash: #8d857a; /* secondary / muted text                 */
+        --ash-dim: #5a544c; /* faint labels, rules                    */
+        --blood: #8a201a; /* the one accent: dried blood            */
+        --blood-lit: #c23a2c; /* brighter blood for hovers              */
+        --max-width: 1180px;
+      }
+
+      /* ---------------- base reset ---------------- */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--void);
+        color: var(--bone);
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 19px;
+        line-height: 1.75;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      /* atmospheric layers: vignette + radial ember glow */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(
+            120% 80% at 50% 118%,
+            rgba(138, 32, 26, 0.2),
+            transparent 55%
+          ),
+          radial-gradient(
+            150% 120% at 50% 0%,
+            transparent 55%,
+            rgba(0, 0, 0, 0.85) 100%
+          );
+      }
+      /* film grain overlay */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        pointer-events: none;
+        opacity: 0.05;
+        mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .wrap {
+        position: relative;
+        z-index: 1;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 28px;
+      }
+
+      /* shared type styles */
+      .eyebrow {
+        font-family: "Cinzel", serif;
+        font-weight: 600;
+        letter-spacing: 0.42em;
+        text-transform: uppercase;
+        font-size: 0.66rem;
+        color: var(--blood-lit);
+      }
+      h2.section-title {
+        font-family: "Cinzel", serif;
+        font-weight: 800;
+        font-size: clamp(2rem, 5vw, 3.4rem);
+        letter-spacing: 0.04em;
+        color: var(--bone);
+        text-transform: uppercase;
+        line-height: 1.05;
+        text-shadow: 0 2px 0 rgba(0, 0, 0, 0.6);
+      }
+      .numeral {
+        font-family: "UnifrakturCook", serif;
+        font-size: 2.6rem;
+        color: var(--blood);
+        line-height: 1;
+      }
+
+      /* ornamental divider between sections */
+      .rune {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 28px;
+        color: var(--ash-dim);
+      }
+      .rune::before,
+      .rune::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--ash-dim),
+          transparent
+        );
+      }
+      .rune span {
+        font-size: 1.1rem;
+        color: var(--blood);
+      }
+      .rune img.sigil {
+        width: 26px;
+        height: 26px;
+        object-fit: contain;
+        mix-blend-mode: screen;
+        opacity: 0.85;
+      }
+
+      section {
+        padding: 110px 0;
+        position: relative;
+      }
+
+      /* ======================= HERO ======================= */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 90px 28px 60px;
+      }
+      .hero .logo {
+        width: min(680px, 90vw);
+        height: auto;
+        /* drops the black box from the logo image so white lettering floats */
+        mix-blend-mode: screen;
+        filter: drop-shadow(0 0 28px rgba(0, 0, 0, 0.9));
+      }
+      .hero .tagline {
+        margin-top: 34px;
+        max-width: 600px;
+        font-style: italic;
+        font-size: 1.25rem;
+        color: var(--ash);
+      }
+      .hero .meta {
+        margin-top: 30px;
+        font-family: "Cinzel", serif;
+        font-weight: 600;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+        color: var(--ash-dim);
+      }
+      .hero .meta b {
+        color: var(--blood-lit);
+        font-weight: 600;
+      }
+      .scroll-cue {
+        margin-top: 62px;
+        font-family: "Cinzel", serif;
+        letter-spacing: 0.3em;
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        color: var(--ash-dim);
+        animation: bob 2.6s ease-in-out infinite;
+      }
+      @keyframes bob {
+        0%,
+        100% {
+          transform: translateY(0);
+          opacity: 0.5;
+        }
+        50% {
+          transform: translateY(7px);
+          opacity: 1;
+        }
+      }
+
+      /* ======================= BIO ======================= */
+      .section-head {
+        display: flex;
+        align-items: baseline;
+        gap: 22px;
+        margin-bottom: 46px;
+      }
+      .bio-grid {
+        display: grid;
+        grid-template-columns: 1.7fr 1fr;
+        gap: 64px;
+        align-items: start;
+      }
+      .bio-body p {
+        margin-bottom: 1.2em;
+        color: #cfc7b9;
+      }
+      .bio-body p:first-of-type::first-letter {
+        font-family: "Cinzel", serif;
+        font-weight: 800;
+        float: left;
+        font-size: 4.6rem;
+        line-height: 0.78;
+        padding: 6px 14px 0 0;
+        color: var(--blood);
+      }
+      /* band facts sidebar */
+      .facts {
+        border-left: 1px solid var(--ash-dim);
+        padding-left: 28px;
+      }
+      .facts dl {
+        display: grid;
+        grid-template-columns: auto;
+        gap: 20px;
+      }
+      .facts dt {
+        font-family: "Cinzel", serif;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        font-size: 0.6rem;
+        color: var(--blood-lit);
+        margin-bottom: 4px;
+      }
+      .facts dd {
+        color: var(--bone);
+        font-size: 1.02rem;
+      }
+
+      /* ======================= DISCOGRAPHY ======================= */
+      .releases {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 30px;
+      }
+      .release {
+        background: var(--void-2);
+        border: 1px solid rgba(141, 133, 122, 0.16);
+        transition:
+          border-color 0.35s ease,
+          transform 0.35s ease;
+      }
+      .release:hover {
+        border-color: var(--blood);
+        transform: translateY(-5px);
+      }
+      .release .cover {
+        aspect-ratio: 1/1;
+        position: relative;
+        overflow: hidden;
+        background: repeating-linear-gradient(
+          45deg,
+          #141210 0 12px,
+          #0e0c0b 12px 24px
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .release .cover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .release .cover .placeholder {
+        font-family: "UnifrakturCook", serif;
+        font-size: 3.4rem;
+        color: var(--ash-dim);
+      }
+      .release .cover img.sigil {
+        width: 34%;
+        height: auto;
+        object-fit: contain;
+        mix-blend-mode: screen;
+        opacity: 0.6;
+      }
+      .release .info {
+        padding: 22px 22px 26px;
+      }
+      .release .status {
+        font-family: "Cinzel", serif;
+        font-size: 0.58rem;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: var(--blood-lit);
+      }
+      .release h3 {
+        font-family: "Cinzel", serif;
+        font-weight: 600;
+        font-size: 1.3rem;
+        margin: 8px 0 4px;
+        color: var(--bone);
+        letter-spacing: 0.02em;
+      }
+      .release .type {
+        color: var(--ash);
+        font-style: italic;
+        font-size: 0.95rem;
+      }
+
+      /* ======================= LISTEN / BANDCAMP ======================= */
+      .listen {
+        text-align: center;
+      }
+      .listen .panel {
+        border: 1px solid var(--ash-dim);
+        padding: 60px 32px;
+        background: linear-gradient(
+          180deg,
+          rgba(138, 32, 26, 0.06),
+          transparent
+        );
+      }
+      .listen p {
+        max-width: 540px;
+        margin: 18px auto 36px;
+        color: var(--ash);
+      }
+      .btn {
+        display: inline-block;
+        font-family: "Cinzel", serif;
+        font-weight: 600;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+        color: var(--bone);
+        border: 1px solid var(--blood);
+        padding: 18px 40px;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+      .btn:hover {
+        background: var(--blood);
+        color: var(--bone);
+        box-shadow: 0 0 30px rgba(138, 32, 26, 0.5);
+      }
+      .btn.disabled {
+        border-color: var(--ash-dim);
+        color: var(--ash-dim);
+        cursor: not-allowed;
+      }
+      .btn.disabled:hover {
+        background: transparent;
+        box-shadow: none;
+      }
+
+      /* ======================= FOOTER ======================= */
+      footer {
+        border-top: 1px solid rgba(141, 133, 122, 0.16);
+        padding: 56px 0 70px;
+        text-align: center;
+      }
+      .social {
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        margin-bottom: 26px;
+        flex-wrap: wrap;
+      }
+      .social a {
+        font-family: "Cinzel", serif;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        color: var(--ash);
+        transition: color 0.25s;
+      }
+      .social a:hover {
+        color: var(--blood-lit);
+      }
+      .copyright {
+        color: var(--ash-dim);
+        font-size: 0.85rem;
+        font-style: italic;
+      }
+
+      /* ======================= SCROLL REVEAL ======================= */
+      .reveal {
+        opacity: 0;
+        transform: translateY(26px);
+        transition:
+          opacity 1s ease,
+          transform 1s ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* hero load animation */
+      .hero .logo,
+      .hero .tagline,
+      .hero .meta,
+      .hero .scroll-cue {
+        opacity: 0;
+        animation: rise 1.3s ease forwards;
+      }
+      .hero .tagline {
+        animation-delay: 0.35s;
+      }
+      .hero .meta {
+        animation-delay: 0.6s;
+      }
+      .hero .scroll-cue {
+        animation-delay: 0.95s;
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* ======================= RESPONSIVE ======================= */
+      @media (max-width: 780px) {
+        body {
+          font-size: 18px;
+        }
+        .bio-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .facts {
+          border-left: none;
+          border-top: 1px solid var(--ash-dim);
+          padding: 28px 0 0;
+        }
+        section {
+          padding: 80px 0;
+        }
+        .section-head {
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ===================================================================
+     HERO  —  the logo image + tagline
+     EDIT: tagline text and the genre/location line below.
+     The big logo is logo.png (keep it in the same folder as this file).
+     =================================================================== -->
+    <header class="hero">
+      <img class="logo" src="logo.png" alt="Laconist logo" />
+      <p class="tagline">
+        Rotting hymns dredged from the soil. Death metal in its oldest, foulest
+        form.
+      </p>
+      <p class="meta">
+        Death Metal &nbsp;·&nbsp; <b>Est. 2007</b> &nbsp;·&nbsp; Hortolândia,
+        Brazil
+      </p>
+      <div class="scroll-cue">Descend ↓</div>
+    </header>
+
+    <!-- ===================================================================
+     SECTION I — BIO
+     EDIT: the band biography paragraphs and the facts on the right.
+     =================================================================== -->
+    <div class="rune"><img class="sigil" src="Sigil.png" alt="" /></div>
+    <section id="bio">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="numeral">I</span>
+          <div>
+            <p class="eyebrow">The Band</p>
+            <h2 class="section-title">Biography</h2>
+          </div>
+        </div>
+
+        <div class="bio-grid reveal">
+          <div class="bio-body">
+            <!-- EDIT: BIO TEXT START -->
+            <p>
+              Forged in [your city] in [year], Laconist channels the suffocating
+              weight of old-school death metal — down-tuned riffs, cavernous
+              vocals, and drumming that collapses inward like wet earth over a
+              coffin lid.
+            </p>
+            <p>
+              Drawing from the genre's most uncompromising roots, the band
+              trades polish for atmosphere: every track is built to feel like
+              something exhumed rather than recorded. Write a few sentences here
+              about your influences, your sound, and what you're trying to
+              summon.
+            </p>
+            <p>
+              With a debut single on the horizon and an EP to follow, Laconist
+              is only beginning to dig. Replace this paragraph with your own
+              story.
+            </p>
+            <!-- EDIT: BIO TEXT END -->
+          </div>
+
+          <!-- EDIT: BAND FACTS (left column on mobile) -->
+          <aside class="facts">
+            <dl>
+              <div>
+                <dt>Origin</dt>
+                <dd>Hortolândia, Brazil</dd>
+              </div>
+              <div>
+                <dt>Formed</dt>
+                <dd>2007</dd>
+              </div>
+              <div>
+                <dt>Genre</dt>
+                <dd>Brutal Death Metal</dd>
+              </div>
+              <div>
+                <dt>Lineup</dt>
+                <dd>Zé Misanthrope (Vocals) · A. Neil (Guitars)</dd>
+              </div>
+              <div>
+                <dt>Label</dt>
+                <dd>Unsigned / Self-released</dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+     SECTION II — DISCOGRAPHY
+     EDIT: To add a release, COPY one <article class="release">…</article>
+     block and change the status, title, type, and cover.
+     To use a real cover image, replace the <div class="placeholder">…</div>
+     with: <img src="cover-filename.jpg" alt="cover" />
+     =================================================================== -->
+    <div class="rune"><img class="sigil" src="Sigil.png" alt="" /></div>
+    <section id="discography">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="numeral">II</span>
+          <div>
+            <p class="eyebrow">Recordings</p>
+            <h2 class="section-title">Discography</h2>
+          </div>
+        </div>
+
+        <div class="releases reveal">
+          <article class="release">
+            <div class="cover">
+              <img src="blessed.png" alt="Blessed in Chthonic Salvation cover" />
+            </div>
+            <div class="info">
+              <span class="status">Out Now</span>
+              <h3>"Blessed in Chthonic Salvation"</h3>
+              <p class="type">Demo · 2008</p>
+            </div>
+          </article>
+
+          <article class="release">
+            <div class="cover">
+              <img src="adveniat.png" alt="Adveniat Infernus cover" />
+            </div>
+            <div class="info">
+              <span class="status">Out Now</span>
+              <h3>"Adveniat Infernus"</h3>
+              <p class="type">EP · 2009</p>
+            </div>
+          </article>
+
+          <article class="release">
+            <div class="cover">
+              <img src="tape.png" alt="Southern Abissal Creatures cover" />
+            </div>
+            <div class="info">
+              <span class="status">Out Now</span>
+              <h3>"Southern Abissal Creatures"</h3>
+              <p class="type">Split · 2010</p>
+            </div>
+          </article>
+
+          <article class="release">
+            <div class="cover">
+              <img src="compilation.png" alt="Blessed in Chthonic Salvation / Adveniat Infernus cover" />
+            </div>
+            <div class="info">
+              <span class="status">Out Now</span>
+              <h3>"Blessed in Chthonic Salvation / Adveniat Infernus"</h3>
+              <p class="type">Compilation · 2011</p>
+            </div>
+          </article>
+
+          <article class="release">
+            <div class="cover">
+              <img src="debut.png" alt="Aural Deathblow cover" />
+            </div>
+            <div class="info">
+              <span class="status">Out Now</span>
+              <h3>"Aural Deathblow"</h3>
+              <p class="type">Full-length · 2011</p>
+            </div>
+          </article>
+
+          <article class="release">
+            <div class="cover">
+              <img src="anticosmic.png" alt="Anticosmic Trance cover" />
+            </div>
+            <div class="info">
+              <span class="status">Out Now</span>
+              <h3>"Anticosmic Trance"</h3>
+              <p class="type">Full-length · 2016</p>
+            </div>
+          </article>
+
+          <!-- ---- RELEASE CARD (copy this whole block to add more) ---- -->
+          <article class="release">
+            <div class="cover">
+              <img src="single.png" alt="[Single Title] cover" />
+            </div>
+            <div class="info">
+              <span class="status">Forthcoming Single</span>
+              <h3>"Vermiforming"</h3>
+              <p class="type">Single · 2026</p>
+            </div>
+          </article>
+          <!-- ---- END RELEASE CARD ---- -->
+
+          <article class="release">
+            <div class="cover">
+              <img src="EP.png" alt="[EP Title] cover" />
+            </div>
+            <div class="info">
+              <span class="status">Forthcoming EP</span>
+              <h3>"Whre Being Ends, I Begin</h3>
+              <p class="type">EP · 2026</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+     SECTION III — LISTEN / BANDCAMP
+     EDIT: When your single is live, paste your Bandcamp URL into href
+     below and remove the word "disabled" from the <a class="btn ...">.
+     =================================================================== -->
+    <div class="rune"><img class="sigil" src="Sigil.png" alt="" /></div>
+    <section id="listen" class="listen">
+      <div class="wrap">
+        <div class="section-head reveal" style="justify-content: center">
+          <span class="numeral">III</span>
+          <div>
+            <p class="eyebrow">Hear It</p>
+            <h2 class="section-title">Listen</h2>
+          </div>
+        </div>
+
+        <div class="panel reveal">
+          <p class="eyebrow">Bandcamp</p>
+          <p>
+            Our first offering is being prepared. The single drops soon, with
+            the EP to follow. Bookmark the page below — or replace this text
+            with a release date.
+          </p>
+
+          <!-- EDIT: paste your Bandcamp link in href, then delete "disabled" -->
+          <a class="btn disabled" href="#" target="_blank" rel="noopener">
+            Bandcamp — Coming Soon
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+     FOOTER
+     EDIT: social links (paste real URLs into href) and contact email.
+     =================================================================== -->
+    <footer>
+      <div class="wrap">
+        <nav class="social">
+          <a href="#" target="_blank" rel="noopener">Bandcamp</a>
+          <a href="#" target="_blank" rel="noopener">Instagram</a>
+          <a href="#" target="_blank" rel="noopener">YouTube</a>
+          <a href="#" target="_blank" rel="noopener">Spotify</a>
+          <a href="mailto:band@example.com">Contact</a>
+        </nav>
+        <p class="copyright">
+          © <span id="year"></span> Laconist. All rites reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      /* auto year */
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      /* scroll reveal */
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>
