@@ -56,7 +56,9 @@
         overflow-x: hidden;
       }
 
-      /* atmospheric layers: vignette + radial ember glow */
+      /* atmospheric layers: faces artwork + dark scrim + vignette + ember glow.
+         The scrim opacity (0.86) controls how faint the artwork is —
+         lower it to make the faces more visible. */
       body::before {
         content: "";
         position: fixed;
@@ -73,7 +75,9 @@
             150% 120% at 50% 0%,
             transparent 55%,
             rgba(0, 0, 0, 0.85) 100%
-          );
+          ),
+          linear-gradient(rgba(10, 9, 8, 0.86), rgba(10, 9, 8, 0.86)),
+          url("faces.jpg") center 25% / cover no-repeat;
       }
       /* film grain overlay */
       body::after {
